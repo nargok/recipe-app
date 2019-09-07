@@ -1,25 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+
+interface Recipe {
+  id: number,
+  title: string,
+  createdAt: Date,
+}
+
+interface State {
+  recipeList: Array<Recipe>,
+}
+
+const dummyRecipe = [
+  {
+    id: 1,
+    title: 'Banana Stick Bread',
+    createdAt: new Date(),
+  },
+  {
+    id: 2,
+    title: 'Orange Cake',
+    createdAt: new Date(),
+  }, 
+]
+
+const initialState = {
+  recipeList: dummyRecipe,
+}
 
 const App: React.FC = () => {
+  const [state, setState] = useState<State>(initialState)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Recipe App</h1>
+      <ul>
+        {
+          state.recipeList.map(i => (
+            <li key={i.id}>
+              <div></div>
+              <span>{i.title}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </>
   );
 }
 
